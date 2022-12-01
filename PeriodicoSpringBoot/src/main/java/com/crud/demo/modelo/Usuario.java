@@ -1,9 +1,16 @@
 package com.crud.demo.modelo;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Usuario {
@@ -14,8 +21,14 @@ public class Usuario {
 	private String apellido;
 	private String correo;
 	private String contraseña;
-	private int rol;
-
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+		@JoinTable(
+			name = "usuario_rol",
+			joinColumns = @JoinColumn(name = "id_usuario", nullable = false),
+			inverseJoinColumns = @JoinColumn(name="id_rol", nullable = false)
+		)
+		private List<Rol> rol;
 	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
@@ -28,8 +41,8 @@ public class Usuario {
 		this.apellido = apellido;
 		this.correo = correo;
 		this.contraseña = contraseña;
-		this.rol = rol;
-	}
+ }
+		
 	public int getId() {
 		return id;
 	}
@@ -59,12 +72,6 @@ public class Usuario {
 	}
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
-	}
-	public int getRol() {
-		return rol;
-	}
-	public void setRol(int rol) {
-		this.rol = rol;
 	}
 	
 }

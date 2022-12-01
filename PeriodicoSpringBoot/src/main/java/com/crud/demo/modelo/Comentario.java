@@ -2,18 +2,24 @@ package com.crud.demo.modelo;
 
 import java.security.Timestamp;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+@Entity
 public class Comentario {
     @Id
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String mensaje;
     private String contenido;
     private Timestamp fecha;
+
+    @ManyToOne
+	@JoinColumn(name="id_noticia")
+	Noticia noticia;
 
     public Comentario(int id, String mensaje, String contenido, Timestamp fecha) {
         this.id = id;

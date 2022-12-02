@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Noticia {
@@ -37,10 +38,8 @@ public class Noticia {
 	@JoinColumn(name="id_usuario")
 	Usuario usuario;
 
-	@ManyToOne
-	@JoinColumn(name="id_comentario")
-	Comentario comentario;
-
+	@OneToMany(mappedBy = "noticia", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentario;
 
 	public Noticia(int id, String titulo, String contenido, Timestamp fecha, String estado,
 			List<com.crud.demo.modelo.Category> category, Usuario usuario, Comentario comentario) {
@@ -51,7 +50,6 @@ public class Noticia {
 		Estado = estado;
 		Category = category;
 		this.usuario = usuario;
-		this.comentario = comentario;
 	}
 
 	public Noticia() {

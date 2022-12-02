@@ -1,5 +1,7 @@
 package com.crud.demo.controler;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.crud.demo.modelo.Category;
 import com.crud.demo.modelo.Noticia;
+import com.crud.demo.modeloDAO.INoticia;
 import com.crud.demo.serviceInterface.INoticiaService;
 
 @Controller
 @RequestMapping
 public class NoticiaControler {
+	private INoticia dao;
 	
 	@Autowired
 	private INoticiaService service;
@@ -50,5 +55,15 @@ public class NoticiaControler {
 	public String eliminar(@PathVariable int id,Model model) {
 		service.delete(id);
 		return "redirect:/listar";
+	}
+
+	@GetMapping("/{categoria}/noticia")
+	
+	public List<Noticia> listarPorCategoria(@PathVariable String nombreCategoria) {
+		List<Category> category = dao.findByCategoria(nombreCategoria);
+		if (!nombreCategoria.isEmpty()) {
+			return category.get(0).getNoticias();
+		}
+		return null;
 	}
 }

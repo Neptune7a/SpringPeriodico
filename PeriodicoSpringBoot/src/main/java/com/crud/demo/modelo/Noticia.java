@@ -1,9 +1,12 @@
 package com.crud.demo.modelo;
 
+import java.io.Serializable;
 import java.security.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,78 +16,135 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import lombok.Data;
+
+
+@Data
 @Entity
-public class Noticia {
+@Table(name="noticia")
+public class Noticia implements Serializable{
 	@Id
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 	private String titulo;
 	private String contenido;
-    private Timestamp fecha;
-	private String Estado;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-        name = "noticia_categoria",
-        joinColumns = @JoinColumn(name = "id_noticia", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="id_categoria", nullable = false)
-    )
-    private List<Category> Category;
-
-
+	private Integer categoria;
 	@ManyToOne
 	@JoinColumn(name="id_usuario")
-	Usuario usuario;
-
-	@OneToMany(mappedBy = "noticia", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comentario> comentario;
-
-	public Noticia(int id, String titulo, String contenido, Timestamp fecha, String estado,
-			List<com.crud.demo.modelo.Category> category, Usuario usuario, Comentario comentario) {
-		this.id = id;
-		this.titulo = titulo;
-		this.contenido = contenido;
-		this.fecha = fecha;
-		Estado = estado;
-		Category = category;
-		this.usuario = usuario;
-	}
-
-	public Noticia() {
-		// TODO Auto-generated constructor stub
-	}
+	private Usuario usuario;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fecha;
+	private String estado;
+	private String url_imagen;
 	
-	public int getId() {
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+
+
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
+
+
+
 	public String getTitulo() {
 		return titulo;
 	}
+
+
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
+
+
 	public String getContenido() {
 		return contenido;
 	}
+
+
+
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
 	}
-	public Timestamp getFecha() {
+
+
+
+	public Integer getCategoria() {
+		return categoria;
+	}
+
+
+
+	public void setCategoria(Integer categoria) {
+		this.categoria = categoria;
+	}
+
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(Timestamp fecha) {
+
+
+
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+
+
+
 	public String getEstado() {
-		return Estado;
+		return estado;
 	}
+
+
+
 	public void setEstado(String estado) {
-		Estado = estado;
+		this.estado = estado;
 	}
-	
+
+
+
+	public String getUrl_imagen() {
+		return url_imagen;
+	}
+
+
+
+	public void setUrl_imagen(String url_imagen) {
+		this.url_imagen = url_imagen;
+	}
+
+
+
+	/*@PrePersist
+	public void prePersist() {
+		this.fecha=new Date();
+	}*/
+
+		
 }

@@ -11,43 +11,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="usuario")
 public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int id_usuario;
 	private String nombre;
 	private String apellido;
 	private String correo;
 	private String contraseña;
-	
-	@ManyToMany(cascade = CascadeType.ALL)
-		@JoinTable(
-			name = "usuario_rol",
-			joinColumns = @JoinColumn(name = "id_usuario", nullable = false),
-			inverseJoinColumns = @JoinColumn(name="id_rol", nullable = false)
-		)
-		private List<Rol> rol;
-	
-	public Usuario() {
-		// TODO Auto-generated constructor stub
+	public int getId_usuario() {
+		return id_usuario;
 	}
-	
-	public Usuario(int id, String nombre, String apellido,String correo,String contraseña,int rol) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.correo = correo;
-		this.contraseña = contraseña;
- }
-		
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 	public String getNombre() {
 		return nombre;
@@ -73,5 +53,7 @@ public class Usuario {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
+	
+	
 	
 }

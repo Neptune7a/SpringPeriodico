@@ -4,35 +4,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 @Entity
+@Table(name="rol")
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String nombreRol;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombreRol() {
-        return nombreRol;
-    }
-
-    public void setNombreRol(String nombreRol) {
-        this.nombreRol = nombreRol;
-    }
-
-    public Rol() {
-    }
-
-    public Rol(int id, String nombreRol) {
-        this.id = id;
-        this.nombreRol = nombreRol;
-    }
+    private int id_rol;
+    private String nombre;
+	public int getId_rol() {
+		return id_rol;
+	}
+	public void setId_rol(int id_rol) {
+		this.id_rol = id_rol;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+    
 
 }

@@ -2,6 +2,7 @@ package com.crud.demo.modelo;
 
 import java.io.Serializable;
 import java.security.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,9 +35,13 @@ public class Noticia implements Serializable{
 	private Integer id;
 	private String titulo;
 	private String contenido;
-	private Integer categoria;
-	@ManyToOne
+	@ManyToMany
+	@JoinTable(name="noticia_categoria", 
+	joinColumns=@JoinColumn(name="id_noticia"),
+	inverseJoinColumns=@JoinColumn(name="id_categoria"))
+	private List<Categoria> categorias = new ArrayList<>();
 	@JoinColumn(name="id_usuario")
+	@ManyToOne
 	private Usuario usuario;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
@@ -80,18 +85,18 @@ public class Noticia implements Serializable{
 	}
 
 
-
-	public Integer getCategoria() {
-		return categoria;
+	
+	public List<Categoria> getCategorias() {
+		return categorias;
 	}
 
 
-
-	public void setCategoria(Integer categoria) {
-		this.categoria = categoria;
+	
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 
-
+	
 
 	public Usuario getUsuario() {
 		return usuario;

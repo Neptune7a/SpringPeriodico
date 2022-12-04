@@ -1,5 +1,6 @@
 package com.crud.demo.modelo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="usuario")
-public class Usuario {
+public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_usuario;
@@ -23,6 +24,9 @@ public class Usuario {
 	private String apellido;
 	private String correo;
 	private String contraseña;
+	
+	
+	
 	public int getId_usuario() {
 		return id_usuario;
 	}

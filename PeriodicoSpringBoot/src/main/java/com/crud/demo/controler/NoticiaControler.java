@@ -32,7 +32,7 @@ public class NoticiaControler {
 	/*@GetMapping("/{categoria}/noticia")
 	
 	 List<Noticia> listarPorCategoria(@PathVariable String nombreCategoria) {
-		List<Categoria> categoria = categoriaRepository.findByCategoria(nombreCategoria);
+		List<Categoria> categoria = noticiaRepository.findByCategoria(nombreCategoria);
 		if (!nombreCategoria.isEmpty()) {
 			return category.get(0).getNoticias();
 		}

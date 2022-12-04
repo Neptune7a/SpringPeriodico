@@ -1,5 +1,6 @@
 package com.crud.demo.modelo;
 
+import java.io.Serializable;
 import java.security.Timestamp;
 
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="comentario")
-public class Comentario {
+public class Comentario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_comentario;
